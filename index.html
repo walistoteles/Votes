@@ -58,7 +58,7 @@ function mostrarVencedor(votos) {
 }
 
 function carregarVotos() {
-  fetch('https://votos-620b1-default-rtdb.firebaseio.com/votos')
+  fetch('https://votos-620b1-default-rtdb.firebaseio.com/votos.json')
     .then(res => res.json())
     .then(votos => {
       mostrarVencedor(votos || {});
@@ -86,12 +86,12 @@ opcoes.forEach(opcao => {
     if (jaVotou) return;
 
     // Busca votos atuais e incrementa +1
-    fetch(`https://SEU_DATABASE_URL.firebaseio.com/votos/${opcao.id}.json`)
+    fetch(`https://votos-620b1-default-rtdb.firebaseio.com/votos/${opcao.id}.json`)
       .then(res => res.json())
       .then(votosAtuais => {
         const novoValor = (votosAtuais || 0) + 1;
 
-        fetch(`https://SEU_DATABASE_URL.firebaseio.com/votos/${opcao.id}.json`, {
+        fetch(`https://votos-620b1-default-rtdb.firebaseio.com/votos/${opcao.id}.json`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(novoValor)
